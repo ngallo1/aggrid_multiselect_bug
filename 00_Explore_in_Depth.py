@@ -7,7 +7,6 @@ from aggrid_select import st_aggrid_dataframe
 
 
 # Parameters for size of dummy DataFrame
-#  ... DataFrames with more rows (hence Aggrid pages) cause more flickering and warnings
 with st.sidebar:
     st.subheader("Data Parametrs")
     number_of_rows = st.number_input(label="Number of Rows", min_value=1, max_value=1000, value=10)
@@ -15,6 +14,7 @@ with st.sidebar:
     df = pd.DataFrame(
         data=np.arange(number_of_rows*number_of_columns).reshape((number_of_rows, number_of_columns))
     )
+
 
 # Parameters for Aggrid display and selection
 with st.sidebar:
@@ -29,6 +29,7 @@ with st.sidebar:
         )
     else:
         pre_select_all_rows = False
+
 
 # Display
 with warnings.catch_warnings(record=True) as warns:
@@ -51,6 +52,7 @@ with warnings.catch_warnings(record=True) as warns:
     st.subheader("Most Recent Warnings")
     st.write(warns)
     for w in warns:  st.write(w)
+
 
 st.subheader("Discussion of Warnings")
 st.markdown("""
