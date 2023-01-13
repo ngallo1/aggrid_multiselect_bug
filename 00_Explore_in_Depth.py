@@ -25,7 +25,7 @@ with st.sidebar:
         pre_select_all_rows = st.checkbox(
             label="Pre-Select All Rows",
             value=True,
-            help="""True: pre-select all rows.  False: pre-select no rows."""
+            help="True: pre-select all rows.  False: pre-select no rows."
         )
     else:
         pre_select_all_rows = False
