@@ -32,7 +32,7 @@ with st.sidebar:
 
 # Display
 with warnings.catch_warnings(record=True) as warns:
-    st.header("Data")
+    st.header("Aggrid Data Selection")
     st_aggrid_dataframe(df, selection_mode, pre_select_all_rows)
     
     st.header("Warnings")

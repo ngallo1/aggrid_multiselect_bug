@@ -23,6 +23,7 @@ df.columns = [str(c) for c in df.columns]    # bug: GridOptionsBuilder only allo
 # Count the number of warnings it throws.
 with warnings.catch_warnings(record=True) as warns:
     st.header("Aggrid Data Selection")
+    st.write("This page is minimum example showing problem (many warnings and slow load)")
     # Set grid options.
     # Bug seems to occur when selection_mode="multiple" and all rows are pre-pre-selected
     gb = GridOptionsBuilder.from_dataframe(df)
@@ -45,9 +46,9 @@ with warnings.catch_warnings(record=True) as warns:
     # Warning ....
     st.subheader("Warning Information")
     if "warning_count" not in st.session_state:
-        st.session_state["warning_count"] = 0
-    st.session_state["warning_count"] += len(warns)
-    st.write(f"""Number of warnings since app start: {st.session_state["warning_count"]}""")
+        st.session_state["warning_count_mwe"] = 0
+    st.session_state["warning_count_mwe"] += len(warns)
+    st.write(f"""Number of warnings since app start: {st.session_state["warning_count_mwe"]}""")
 
     st.write("Most recent warnings:")
     st.write(warns)
