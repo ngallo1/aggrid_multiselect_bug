@@ -30,7 +30,7 @@ with st.sidebar:
     else:
         pre_select_all_rows = False
 
-# Display 
+# Display
 with warnings.catch_warnings(record=True) as warns:
     st.header("Data")
     st_aggrid_dataframe(df, selection_mode, pre_select_all_rows)
