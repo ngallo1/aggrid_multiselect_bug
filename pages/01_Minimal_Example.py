@@ -9,7 +9,7 @@ from st_aggrid.shared import ColumnsAutoSizeMode
 
 
 # Make sample data
-number_of_rows = 100
+number_of_rows = 200
 number_of_columns = 5
 df = pd.DataFrame(
     data=np.arange(number_of_rows*number_of_columns).reshape((number_of_rows, number_of_columns))
