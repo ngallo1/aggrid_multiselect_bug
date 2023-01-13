@@ -62,7 +62,7 @@ st.markdown("""
     
     - But I am not sure why \_\_init\_\_.py is called so many times.  I thought it would be called only once, at the start of the app.  Instead, by examining the accumulated warning count, we can see that it is called:
 
-        - Every time a row of the grid is selected or deselected  (for selection_mode either "single" or "multiple")
+        - Every time a row of the grid is selected or deselected  (for selection_mode either "single" or "multiple").
     
         - Many times when selection_mode="multiple" and pre_select_all_rows=True.
         
