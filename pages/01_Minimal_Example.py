@@ -21,6 +21,7 @@ df.columns = [str(c) for c in df.columns]    # bug: GridOptionsBuilder only allo
 
 # Displays the DataFrame and get click events
 # Count the number of warnings it throws.
+# These warnings all come from st_aggrid.__init__.py
 with warnings.catch_warnings(record=True) as warns:
     st.header("Aggrid Data Selection")
     st.write("This page is minimum example showing problem (many warnings and slow load)")
@@ -45,7 +46,7 @@ with warnings.catch_warnings(record=True) as warns:
 
     # Warning ....
     st.subheader("Warning Information")
-    if "warning_count" not in st.session_state:
+    if "warning_count_mwe" not in st.session_state:
         st.session_state["warning_count_mwe"] = 0
     st.session_state["warning_count_mwe"] += len(warns)
     st.write(f"""Number of warnings since app start: {st.session_state["warning_count_mwe"]}""")
