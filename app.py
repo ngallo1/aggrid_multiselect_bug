@@ -32,7 +32,13 @@ with st.sidebar:
 
 # Display
 with warnings.catch_warnings(record=True) as warns:
-    st.header("Aggrid Data Selection")
+    st.header("Exploratory Page")
+    st.write("This page has inputs that control the data size and selection behavior of aggrid.")
+    st.write("The problematic behavior on Streamlit Cloud is discussed at the bottom of this page and can be reproduced with these controls.")
+    st.write()
+
+
+    st.subheader("Aggrid Data Selection")
     st_aggrid_dataframe(df, selection_mode, pre_select_all_rows)
     
     st.header("Warnings")
@@ -51,17 +57,21 @@ st.subheader("Discussion of Warnings")
 st.markdown("""
     This section discusses my observations of the app behavior and how they provide clues as to what the underlying bug is.
 
-    - The warnings occur at one of two lines in st_aggrid.__init__.py.  These seem easy enough to fix in the package.
+    - The warnings occur in st_aggrid.\_\_init\_\_.py (at line 42 about iteritems() call).  It seems easy enough to fix this in the package.
     
-    - But I am not sure why __init__.py is called so many times.  I thought it would be called only once, at the start of the app.  Instead it seems to be called:
+    - But I am not sure why \_\_init\_\_.py is called so many times.  I thought it would be called only once, at the start of the app.  Instead, by examining the accumulated warning count, we can see that it is called:
 
         - Every time an option changes and the aggrid is reloaded
     
-        - Every time a row of the grid is selected"
+        - Every time a row of the grid is selected  (for selection_mode either "single" or "multiple")
     
-        - Many times for DataFrames with large number of rows (perhaps related to the number of pages in aggrid pagination?)
+        - Many times when selection_mode="multiple" and pre_select_all_rows=True.
+        
+            - Many (but not all) times it throws a warning for each page of data in the aggrid.  This causes datasets with a modest number of rows (eg 100) to load slowly.
 
-            - I am also not sure why, often, only a single warning is recorded and displayed.  This seems to suggest that the "with" warning block is being called multiple times by Streamlit, rather than that streamlit_aggrid is 
+            - Although many warnings are raised, only one is recorded and displayed.  This seems to suggest that the code in the "with" warning block is being executed multiple times by Streamlit, each time raising one warning  (as opposed to )
+
+            - This behavior occurs only on Streamlit Cloud and not on my local machine (Windows 10, exact same package versions).
 """)
 
 # -------------------------------------------------

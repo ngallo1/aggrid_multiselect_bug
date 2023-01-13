@@ -23,8 +23,14 @@ df.columns = [str(c) for c in df.columns]    # bug: GridOptionsBuilder only allo
 # Count the number of warnings it throws.
 # These warnings all come from st_aggrid.__init__.py
 with warnings.catch_warnings(record=True) as warns:
-    st.header("Aggrid Data Selection")
-    st.write("This page is minimum example showing problem (many warnings and slow load)")
+    st.header("Minimum Example")
+    st.markdown("""
+        This page is the minimum example illustrating the problem:
+        
+        - When select_mode="multiple" and all checkboxes are initialized to true, the data is slow to load, presumably related to the many warnings that are thrown, as can be seen by the warning count displayed below the aggrid DataFrame.  This problem is even worse for larger datasets.
+    """)
+
+    st.subheader("Aggrid Data Selection")
     # Set grid options.
     # Bug seems to occur when selection_mode="multiple" and all rows are pre-pre-selected
     gb = GridOptionsBuilder.from_dataframe(df)
@@ -54,12 +60,3 @@ with warnings.catch_warnings(record=True) as warns:
     st.write("Most recent warnings:")
     st.write(warns)
     for w in warns:  st.write(w)
-
-st.subheader("Warning Discussion")
-st.markdown("""
-- The aggrid dataframe is slow to load and throws many warnings, each resulting from a call to st_aggrid.\_\_init\_\_.py.
-
-- This occurs when using selection_mode="multiple", with all rows initially selected, and with multiple pages of data.  The problem is more severe for larger datasets (not shown).
-
-- I encounter this problem only on Streamlit Cloud and not my local machine.
-""")
