@@ -35,7 +35,6 @@ with warnings.catch_warnings(record=True) as warns:
     st.header("Exploratory Page")
     st.write("This page has inputs that control the data size and selection behavior of aggrid.")
     st.write("The problematic behavior on Streamlit Cloud is discussed at the bottom of this page and can be reproduced with these controls.")
-    st.write()
 
 
     st.subheader("Aggrid Data Selection")
