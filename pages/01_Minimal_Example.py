@@ -23,7 +23,7 @@ df.columns = [str(c) for c in df.columns]    # bug: GridOptionsBuilder only allo
 # Count the number of warnings it throws.
 # These warnings all come from st_aggrid.__init__.py
 with warnings.catch_warnings(record=True) as warns:
-    st.header("Minimum Example")
+    st.header("Minimal Example")
     st.markdown("""
         This page is the minimum example illustrating the problem:
         
