@@ -42,7 +42,7 @@ def st_aggrid_dataframe(
         update_mode=GridUpdateMode.GRID_CHANGED,
         columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS,
     )
-    
+
     # Parse selected DataFrame rows from aggrid response object
     if selection_mode=="disabled":
         return None
